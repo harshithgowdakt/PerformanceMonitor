@@ -1,0 +1,7 @@
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\bin\Debug\PerformanceMonitor.exe.config
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\bin\Debug\PerformanceMonitor.exe
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\bin\Debug\PerformanceMonitor.pdb
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\obj\Debug\PerformanceMonitor.csproj.CoreCompileInputs.cache
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\obj\Debug\PerformanceMonitor.exe
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\obj\Debug\PerformanceMonitor.pdb
+C:\Users\harshith\code\PerformanceMonitor\PerformanceMonitor\obj\Debug\PerformanceMonitor.csproj.AssemblyReference.cache
