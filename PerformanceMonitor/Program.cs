@@ -7,36 +7,33 @@ using System.Timers;
 namespace PerformanceMonitor
 {
     class Program
-    {
-        protected static PerformanceCounter cpuCounter;
-        protected static PerformanceCounter ramCounter;
+    { 
         static void Main(string[] args)
         {
-            cpuCounter = new PerformanceCounter("Process", "% Processor Time",Process.GetCurrentProcess().ProcessName);
+            // Create a new PerformanceCounter for the target process's CPU usage
+            var cpuCounter = new PerformanceCounter("Process", "% Processor Time", Process.GetCurrentProcess().ProcessName);
+            var memoryCounter = new PerformanceCounter("Process", "Working Set - Private", Process.GetCurrentProcess().ProcessName);
 
-
-            ramCounter = new PerformanceCounter("Memory", "Available MBytes", Process.GetCurrentProcess().ProcessName);
-
-            try
+            var timer = new System.Timers.Timer(500);
+            timer.Elapsed += (sender, e) =>
             {
-                System.Timers.Timer t = new System.Timers.Timer(500);
-                t.Elapsed += new ElapsedEventHandler(TimerElapsed);
-                t.Start();
-                Thread.Sleep(10000);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"catched exception {e}");
-            }
-            Console.ReadLine();
+                Thread.Sleep(1000);
 
-        }
+                float cpuUsage = cpuCounter.NextValue() / Environment.ProcessorCount;
+                float memoryUsage = memoryCounter.NextValue() / (1024 * 1024); // convert to megabytes
 
-        public static void TimerElapsed(object source, ElapsedEventArgs e)
-        {
-            float cpu = cpuCounter.NextValue();
-            float ram = ramCounter.NextValue();
-            Console.WriteLine("RAM: " + (ram /1024/1024) + " MB; CPU: " + (cpu) + " %");
+                Console.WriteLine($" {Process.GetCurrentProcess().ProcessName}   CPU : {cpuUsage:F2}%   MEM :  {memoryUsage:F2} MB");
+            };
+
+            timer.Start();
+
+            // Wait for user input before exiting
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
+
+            // Stop the timer
+            timer.Stop();
+            timer.Dispose();
         }
     }
 }
